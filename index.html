@@ -11,51 +11,182 @@
       --ok:#6ee7b7;--err:#fca5a5;
     }
     *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-    body{font-family:"Nunito",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      background: radial-gradient(circle at top,#1f2937 0,#020617 55%); color:var(--text); min-height:100vh}
-    .app{max-width:720px;margin:0 auto;background:rgba(15,23,42,.92);border:1px solid rgba(148,163,184,.25);
-      border-radius:20px; padding:16px 14px 92px; position:relative; overflow:hidden; box-shadow:0 18px 45px rgba(0,0,0,.45)}
+    body{
+      font-family:"Nunito",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background: radial-gradient(circle at top,#1f2937 0,#020617 55%);
+      color:var(--text); min-height:100vh;
+    }
+    .app{
+      max-width:720px; margin:0 auto;
+      background:rgba(15,23,42,.92);
+      border:1px solid rgba(148,163,184,.25);
+      border-radius:20px;
+      padding:16px 14px 92px;
+      position:relative; overflow:hidden;
+      box-shadow:0 18px 45px rgba(0,0,0,.45);
+    }
     .blob{position:absolute;width:220px;height:220px;border-radius:999px;filter:blur(40px);opacity:.22;pointer-events:none}
-    .blob.pink{background:#f472b6;top:-80px;right:-60px}.blob.blue{background:#38bdf8;bottom:-120px;left:-40px}
+    .blob.pink{background:#f472b6;top:-80px;right:-60px}
+    .blob.blue{background:#38bdf8;bottom:-120px;left:-40px}
     .app-inner{position:relative;z-index:1}
 
     header{display:flex;flex-direction:column;gap:12px;margin-bottom:10px}
     .title{font-size:1.5rem;font-weight:800}
     .subtitle{color:var(--muted)}
-    .name-form{display:flex;gap:8px;align-items:center;border:1px solid rgba(148,163,184,.5);padding:8px 10px;border-radius:14px;background:rgba(15,23,42,.85)}
-    .name-form label{color:var(--muted)}
-    .name-form input{flex:1;background:transparent;border:none;outline:none;color:var(--text);padding:10px 8px;font-size:1rem}
-    .btn{border:none;border-radius:999px;padding:10px 14px;cursor:pointer;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0b1120}
+    .name-form{
+      display:flex;gap:12px;align-items:center;
+      border:1px solid rgba(148,163,184,.5);
+      padding:12px 14px;border-radius:16px;
+      background:linear-gradient(135deg,rgba(56,189,248,.1),rgba(244,114,182,.08));
+      box-shadow:0 8px 28px rgba(0,0,0,.35);
+    }
+    .name-form label{
+      color:var(--muted);
+      font-weight:800;
+      letter-spacing:.01em;
+    }
+    .name-form:focus-within{
+      border-color:rgba(56,189,248,.8);
+      box-shadow:0 10px 30px rgba(56,189,248,.2);
+    }
+    .name-form input{
+      flex:1;background:transparent;border:none;outline:none;
+      color:var(--text);padding:10px 8px;font-size:1rem;
+      font-weight:700;
+    }
+    .btn{
+      border:none;border-radius:999px;padding:10px 14px;
+      cursor:pointer;font-weight:800;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      color:#0b1120;
+    }
 
-    /* Thumbnail row */
-    .thumbs{display:flex;justify-content:center;gap:16px;margin-top:8px}
-    .thumb{width:110px;height:110px;border-radius:999px;position:relative;flex:0 0 auto;
-      border:3px solid rgba(244,114,182,.45);box-shadow:0 10px 24px rgba(0,0,0,.45);overflow:hidden;background:#000}
-    .thumb video{width:100%;height:100%;object-fit:cover;display:block}
-    .thumb .label{position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);background:rgba(2,6,23,.8);
-      padding:3px 8px;border-radius:999px;font-size:.8rem;border:1px solid rgba(148,163,184,.4)}
-    .thumb.selected{outline:3px solid var(--ok);box-shadow:0 0 0 6px rgba(110,231,183,.15)}
+    /* Thumbnail row with titles below */
+    .thumbs{
+      display:flex;justify-content:space-between;gap:10px;
+      margin-top:10px;
+    }
+    .thumb-item{
+      flex:1;display:flex;flex-direction:column;
+      align-items:center;gap:6px;min-width:0;
+    }
+    .thumb{
+      width:100px;height:100px;
+      border-radius:999px;
+      position:relative;flex:0 0 auto;
+      border:3px solid rgba(244,114,182,.45);
+      box-shadow:0 10px 24px rgba(0,0,0,.45);
+      overflow:hidden;background:#000;
+      padding:0;
+      cursor:pointer;
+    }
+    .thumb video{
+      width:100%;height:100%;
+      object-fit:cover;display:block;
+    }
+    .thumb-title{
+      font-size:.85rem;text-align:center;
+      color:var(--text);
+      max-width:7rem;
+      white-space:normal;
+    }
+    .select-inline{
+      margin-top:4px;
+      border:1px solid rgba(148,163,184,.5);
+      background:rgba(15,23,42,.7);
+      color:var(--text);
+      border-radius:12px;
+      padding:8px 12px;
+      font-weight:800;
+      cursor:pointer;
+      transition:transform .12s ease, border-color .12s ease;
+    }
+    .select-inline:hover{transform:translateY(-1px);border-color:rgba(244,114,182,.7)}
+    .select-inline.selected{
+      background:rgba(110,231,183,.12);
+      border-color:var(--ok);
+      color:var(--ok);
+    }
+    .thumb.selected{
+      outline:3px solid var(--ok);
+      box-shadow:0 0 0 6px rgba(110,231,183,.15);
+    }
 
     /* Sticky submit bar */
     .submit-bar{position:sticky;bottom:0;left:0;right:0;margin-top:16px}
-    .submit-inner{display:flex;align-items:center;justify-content:space-between;gap:10px;background:linear-gradient(180deg,rgba(2,6,23,0) 0%,rgba(2,6,23,.6) 15%,rgba(2,6,23,.9) 100%);
-      padding:12px 10px 14px;border-top:1px dashed rgba(148,163,184,.4);backdrop-filter:blur(6px);border-bottom-left-radius:20px;border-bottom-right-radius:20px}
-    .status{min-height:1.2em}.status.error{color:var(--err)}.status.ok{color:var(--ok)}
-    .submit-btn{border:none;border-radius:999px;padding:12px 18px;font-weight:900;font-size:1rem;cursor:pointer;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0b1120;box-shadow:0 10px 24px rgba(0,0,0,.5)}
+    .submit-inner{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      background:linear-gradient(180deg,rgba(2,6,23,0) 0%,rgba(2,6,23,.6) 15%,rgba(2,6,23,.9) 100%);
+      padding:12px 10px 14px;
+      border-top:1px dashed rgba(148,163,184,.4);
+      backdrop-filter:blur(6px);
+      border-bottom-left-radius:20px;
+      border-bottom-right-radius:20px;
+    }
+    .status{min-height:1.2em}
+    .status.error{color:var(--err)}
+    .status.ok{color:var(--ok)}
+    .submit-btn{
+      border:none;border-radius:999px;
+      padding:12px 18px;font-weight:900;font-size:1rem;
+      cursor:pointer;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      color:#0b1120;
+      box-shadow:0 10px 24px rgba(0,0,0,.5);
+    }
     .submit-btn:disabled{opacity:.55;cursor:not-allowed}
 
     /* Fullscreen modal */
-    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;
-      background:rgba(2,6,23,.75);backdrop-filter:blur(6px);z-index:50}
+    .modal{
+      position:fixed;inset:0;
+      display:none;
+      align-items:center;justify-content:center;
+      background:rgba(2,6,23,.75);
+      backdrop-filter:blur(6px);
+      z-index:50;
+    }
     .modal.open{display:flex}
-    .viewer{position:relative;width:min(92vw,480px);aspect-ratio:9/16;border-radius:16px;overflow:hidden;border:1px solid rgba(148,163,184,.35);box-shadow:0 18px 45px rgba(0,0,0,.6);background:#000}
+    .viewer{
+      position:relative;
+      width:min(92vw,480px);
+      aspect-ratio:9/16;
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid rgba(148,163,184,.35);
+      box-shadow:0 18px 45px rgba(0,0,0,.6);
+      background:#000;
+    }
     .viewer video{width:100%;height:100%;object-fit:cover;display:block}
-    .close{position:absolute;top:8px;right:8px;border:none;border-radius:999px;padding:8px 10px;font-weight:900;cursor:pointer;background:rgba(2,6,23,.85);color:var(--text);border:1px solid rgba(148,163,184,.5)}
-    .select-btn{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);border:none;border-radius:999px;padding:10px 16px;font-weight:900;cursor:pointer;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0b1120;box-shadow:0 10px 24px rgba(0,0,0,.5)}
+    .viewer-title{
+      position:absolute;
+      top:10px;left:50%;transform:translateX(-50%);
+      background:rgba(2,6,23,.85);
+      padding:6px 12px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.6);
+      font-weight:700;
+      font-size:.9rem;
+    }
+    .close{
+      position:absolute;top:10px;left:10px;
+      border:none;border-radius:999px;
+      padding:6px 10px;font-weight:900;cursor:pointer;
+      background:rgba(2,6,23,.85);
+      color:var(--text);
+      border:1px solid rgba(148,163,184,.5);
+    }
+    .select-btn{
+      position:absolute;bottom:10px;left:50%;transform:translateX(-50%);
+      border:none;border-radius:999px;
+      padding:10px 16px;font-weight:900;cursor:pointer;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      color:#0b1120;
+      box-shadow:0 10px 24px rgba(0,0,0,.5);
+    }
 
-    @media (min-width:420px){ .thumb{width:128px;height:128px} }
+    @media (min-width:420px){
+      .thumb{width:120px;height:120px}
+    }
   </style>
 </head>
 <body>
@@ -68,24 +199,61 @@
         <form id="name-form" class="name-form" onsubmit="return false;">
           <label for="name-input">Name</label>
           <input id="name-input" type="text" placeholder="e.g. Zhen..." autocomplete="off" />
-          <button id="start-btn" class="btn" type="button">Start 💫</button>
         </form>
       </header>
 
-      <!-- Circular thumbnails row -->
+      <!-- Circular thumbnails with titles below -->
       <section class="thumbs">
-        <button class="thumb" data-name="Spaghetti" data-src="video/spaghetti.mp4" aria-label="Open Spaghetti">
-          <video muted playsinline loop preload="metadata"><source src="video/spaghetti.mp4" type="video/mp4"></video>
-          <span class="label">Spaghetti</span>
-        </button>
-        <button class="thumb" data-name="Strategy" data-src="video/strategy.mp4" aria-label="Open Strategy">
-          <video muted playsinline loop preload="metadata"><source src="video/strategy.mp4" type="video/mp4"></video>
-          <span class="label">Strategy</span>
-        </button>
-        <button class="thumb" data-name="Sports Car" data-src="video/sports_car.mp4" aria-label="Open Sports Car">
-          <video muted playsinline loop preload="metadata"><source src="video/sports_car.mp4" type="video/mp4"></video>
-          <span class="label">Sports Car</span>
-        </button>
+        <div class="thumb-item">
+          <button class="thumb" data-name="Spaghetti" data-src="video/spaghetti.mp4" aria-label="Open Spaghetti">
+            <video
+              muted
+              autoplay
+              loop
+              playsinline
+              preload="metadata"
+              <!-- optional: poster="img/spaghetti_poster.jpg" -->
+            >
+              <source src="video/spaghetti.mp4" type="video/mp4">
+            </video>
+          </button>
+          <div class="thumb-title">Spaghetti</div>
+          <button class="select-inline" type="button" data-name="Spaghetti">Select</button>
+        </div>
+
+        <div class="thumb-item">
+          <button class="thumb" data-name="Strategy" data-src="video/strategy.mp4" aria-label="Open Strategy">
+            <video
+              muted
+              autoplay
+              loop
+              playsinline
+              preload="metadata"
+              <!-- optional: poster="img/strategy_poster.jpg" -->
+            >
+              <source src="video/strategy.mp4" type="video/mp4">
+            </video>
+          </button>
+          <div class="thumb-title">Strategy</div>
+          <button class="select-inline" type="button" data-name="Strategy">Select</button>
+        </div>
+
+        <div class="thumb-item">
+          <button class="thumb" data-name="Sports Car" data-src="video/sports_car.mp4" aria-label="Open Sports Car">
+            <video
+              muted
+              autoplay
+              loop
+              playsinline
+              preload="metadata"
+              <!-- optional: poster="img/sports_car_poster.jpg" -->
+            >
+              <source src="video/sports_car.mp4" type="video/mp4">
+            </video>
+          </button>
+          <div class="thumb-title">Sports Car</div>
+          <button class="select-inline" type="button" data-name="Sports Car">Select</button>
+        </div>
       </section>
 
       <!-- Sticky submit -->
@@ -105,6 +273,7 @@
   <div id="modal" class="modal" aria-hidden="true">
     <div class="viewer">
       <button class="close" id="close">✕</button>
+      <div class="viewer-title" id="viewer-title"></div>
       <video id="player" controls playsinline preload="metadata"></video>
       <button id="pick" class="select-btn">Select this</button>
     </div>
@@ -112,25 +281,25 @@
 
   <script>
     // ===== CONFIG =====
-    const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbySrA8feUCAfmKFDet3RRsHiY28f4dzgIh1puQgVwNdBEvV9vGNe2ESIQC1GxHma02M/exec"; // e.g. https://script.google.com/macros/s/.../exec
+    const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbySrA8feUCAfmKFDet3RRsHiY28f4dzgIh1puQgVwNdBEvV9vGNe2ESIQC1GxHma02M/exec"; // replace with your real URL
 
     // ===== ELEMENTS =====
     const nameInput = document.getElementById('name-input');
-    const startBtn  = document.getElementById('start-btn');
     const statusEl  = document.getElementById('status');
     const countEl   = document.getElementById('count');
     const submitBtn = document.getElementById('submit-btn');
     const thumbs    = Array.from(document.querySelectorAll('.thumb'));
+    const inlineSelects = Array.from(document.querySelectorAll('.select-inline'));
 
-    const modal  = document.getElementById('modal');
-    const player = document.getElementById('player');
-    const pickBtn= document.getElementById('pick');
-    const closeBtn= document.getElementById('close');
+    const modal      = document.getElementById('modal');
+    const player     = document.getElementById('player');
+    const pickBtn    = document.getElementById('pick');
+    const closeBtn   = document.getElementById('close');
+    const viewerTitle= document.getElementById('viewer-title');
 
     // ===== STATE =====
-    let voter = "";
-    const chosen = new Set(); // names of selected videos
-    const submittedNames = new Set();
+    const chosen = new Set();          // selected video names
+    const submittedNames = new Set();  // to prevent double-vote by name
     let currentVideo = { name: "", src: "" };
 
     // ===== HELPERS =====
@@ -139,25 +308,61 @@
       statusEl.classList.toggle('ok', ok);
       statusEl.classList.toggle('error', !ok && !!msg);
     };
+
     const syncSubmit = () => {
-      const ready = !!(voter || nameInput.value.trim()) && chosen.size === 2;
+      const n = nameInput.value.trim();
+      const ready = !!n && chosen.size === 2;
       countEl.textContent = `${chosen.size}/2`;
       submitBtn.disabled = !ready;
-      if (!ready) {
-        if (!(voter || nameInput.value.trim())) setStatus("Enter your name to start 📝");
-        else if (chosen.size < 2) setStatus("Pick exactly two videos ✌️");
-      } else setStatus(`Ready to submit, ${voter || nameInput.value.trim()}!`, true);
+
+      if (!n) {
+        setStatus("Type your name so we can count your vote 📝");
+      } else if (chosen.size < 2) {
+        setStatus(`Hi ${n}! Pick exactly two videos ✌️`);
+      } else {
+        setStatus(`Ready to submit, ${n}!`, true);
+      }
     };
+
+    const updateSelectionUI = (name) => {
+      const isSelected = chosen.has(name);
+      const thumb = document.querySelector(`.thumb[data-name="${name}"]`);
+      const inlineBtn = document.querySelector(`.select-inline[data-name="${name}"]`);
+      if (thumb) thumb.classList.toggle('selected', isSelected);
+      if (inlineBtn) {
+        inlineBtn.classList.toggle('selected', isSelected);
+        inlineBtn.textContent = isSelected ? "Unselect" : "Select";
+      }
+      if (currentVideo.name === name && pickBtn) {
+        pickBtn.textContent = isSelected ? "Unselect" : "Select this";
+      }
+    };
+
+    const toggleSelection = (name) => {
+      if (chosen.has(name)) {
+        chosen.delete(name);
+      } else {
+        if (chosen.size >= 2) {
+          setStatus("You can only pick 2 videos 💡");
+          return;
+        }
+        chosen.add(name);
+      }
+      updateSelectionUI(name);
+      syncSubmit();
+    };
+
     const openModal = (name, src) => {
       currentVideo = { name, src };
+      viewerTitle.textContent = name;
       player.src = src;
       modal.classList.add('open');
       modal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
       player.play().catch(()=>{});
-      // Update pick button label to reflect toggle state
       pickBtn.textContent = chosen.has(name) ? "Unselect" : "Select this";
     };
+
     const closeModal = () => {
       player.pause();
       modal.classList.remove('open');
@@ -166,46 +371,39 @@
     };
 
     // ===== UI EVENTS =====
-    startBtn.addEventListener('click', ()=>{
-      const n = nameInput.value.trim();
-      if(!n){ setStatus("Please enter your name 🐾"); return; }
-      voter = n;
-      setStatus(`Hi ${n}! Tap a circle to preview, then select two 💕`, true);
-      syncSubmit();
-    });
+    nameInput.addEventListener('input', syncSubmit);
+    nameInput.addEventListener('blur', syncSubmit);
 
-    // Thumbnail click → open fullscreen modal
     thumbs.forEach(btn=>{
       btn.addEventListener('click', ()=>{
         openModal(btn.dataset.name, btn.dataset.src);
       });
     });
 
-    // In-modal toggle select
+    // Select/unselect directly on the main page
+    inlineSelects.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        toggleSelection(btn.dataset.name);
+      });
+    });
+
+    // Toggle selection in modal
     pickBtn.addEventListener('click', ()=>{
-      const name = currentVideo.name;
-      if (chosen.has(name)) {
-        chosen.delete(name);
-        document.querySelector(`.thumb[data-name="${name}"]`)?.classList.remove('selected');
-        pickBtn.textContent = "Select this";
-      } else {
-        if (chosen.size >= 2) { setStatus("You can only pick 2 videos 💡"); return; }
-        chosen.add(name);
-        document.querySelector(`.thumb[data-name="${name}"]`)?.classList.add('selected');
-        pickBtn.textContent = "Unselect";
-      }
-      syncSubmit();
+      toggleSelection(currentVideo.name);
     });
 
     closeBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
 
-    // Submit votes
+    // Submit votes to Google Apps Script
     submitBtn.addEventListener('click', async ()=>{
-      const name = voter || nameInput.value.trim();
+      const name = nameInput.value.trim();
       if(!name){ setStatus("Please enter your name first 🐾"); return; }
       if(chosen.size !== 2){ setStatus("Select exactly two videos ✌️"); return; }
-      if(submittedNames.has(name.toLowerCase())){ setStatus("Looks like you've already voted. Thank you! 🫶"); return; }
+      if(submittedNames.has(name.toLowerCase())){
+        setStatus("Looks like you've already voted. Thank you! 🫶");
+        return;
+      }
 
       const votes = Array.from(chosen);
       try {
