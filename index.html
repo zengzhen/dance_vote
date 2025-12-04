@@ -2,87 +2,60 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Dance Video Vote 💜</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <title>Dance Vote · Pop & Zoom 💜</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg:#0f172a;--card:#1f2937;--accent:#f472b6;--accent-2:#38bdf8;--text:#e5e7eb;--muted:#9ca3af;
+      --ok:#6ee7b7;--err:#fca5a5;
     }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      font-family:"Nunito",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      background: radial-gradient(circle at top,#1f2937 0,#020617 55%);
-      color:var(--text);
-      min-height:100vh;
-      display:flex; align-items:center; justify-content:center;
-      padding:24px;
-    }
-    .app{
-      width:100%; max-width:1000px;
-      background:rgba(15,23,42,.92);
-      border:1px solid rgba(148,163,184,.3);
-      border-radius:24px;
-      padding:24px 24px 30px;
-      position:relative;
-      overflow:hidden;
-      box-shadow:0 18px 45px rgba(0,0,0,.45)
-    }
-    .blob{position:absolute; width:260px; height:260px; border-radius:999px; filter:blur(40px); opacity:.25; pointer-events:none}
-    .blob.pink{background:#f472b6; top:-80px; right:-60px}
-    .blob.blue{background:#38bdf8; bottom:-120px; left:-40px}
-    .app-inner{position:relative; z-index:1}
-    header{display:flex; flex-direction:column; gap:16px; margin-bottom:18px; align-items:flex-start}
-    .title{font-size:1.8rem; font-weight:700; display:flex; gap:10px; align-items:center}
-    .subtitle{font-size:.95rem; color:var(--muted)}
-    .name-form{display:flex; flex-wrap:wrap; gap:12px; align-items:center; border:1px solid rgba(148,163,184,.7);
-      padding:10px 12px; border-radius:999px; background:rgba(15,23,42,.85)}
-    .name-form input{flex:1 1 150px; background:transparent; border:none; outline:none; color:var(--text); padding:8px 12px}
-    .name-form button{border:none; border-radius:999px; padding:8px 14px; cursor:pointer; font-weight:700;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#0b1120}
-    .videos-grid{
-      display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-top:10px;
-    }
-    .video-card{
-      background: radial-gradient(circle at top left, rgba(248,250,252,.06), transparent 65%), var(--card);
-      border-radius:16px; padding:12px; border:1px solid rgba(148,163,184,.4);
-      box-shadow:0 12px 30px rgba(15,23,42,.8);
-      width:300px;
-      display:flex; flex-direction:column; gap:8px; align-items:center;
-    }
-    .song{font-weight:700; font-size:1rem; text-align:center;}
-    .tag{font-size:.7rem; padding:2px 8px; border-radius:999px; border:1px solid rgba(148,163,184,.5); color:var(--muted)}
-    .video-wrapper{
-      border-radius:14px; overflow:hidden;
-      border:1px solid rgba(31,41,55,.9);
-      background:#000;
-      width:100%;
-      aspect-ratio:9/16;
-    }
-    video{
-      width:100%; height:100%; object-fit:cover; display:block; background:#000;
-    }
-    .vote-row{
-      display:flex; justify-content:center; align-items:center; gap:8px; font-size:.9rem;
-    }
-    .cute-check{
-      width:20px; height:20px; border-radius:6px; border:2px solid var(--muted);
-      display:inline-flex; align-items:center; justify-content:center;
-      cursor:pointer; background:rgba(15,23,42,.8);
-    }
-    .cute-check input{display:none}
-    .cute-check span{font-size:.9rem; opacity:0; transform:scale(.5); transition:.08s}
-    .cute-check.checked{border-color:var(--accent); box-shadow:0 0 10px rgba(244,114,182,.6); background:rgba(244,114,182,.2)}
-    .cute-check.checked span{opacity:1; transform:scale(1)}
-    .vote-caption{color:var(--muted); font-size:.8rem}
-    .footer{
-      display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;
-      gap:12px; margin-top:20px; border-top:1px dashed rgba(148,163,184,.5);
-      padding-top:12px; font-size:.85rem; color:var(--muted)
-    }
-    .status-message{min-height:1.1em}
-    .status-message.error{color:#fca5a5}
-    .status-message.success{color:#6ee7b7}
+    *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+    body{font-family:"Nunito",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background: radial-gradient(circle at top,#1f2937 0,#020617 55%); color:var(--text); min-height:100vh}
+    .app{max-width:720px;margin:0 auto;background:rgba(15,23,42,.92);border:1px solid rgba(148,163,184,.25);
+      border-radius:20px; padding:16px 14px 92px; position:relative; overflow:hidden; box-shadow:0 18px 45px rgba(0,0,0,.45)}
+    .blob{position:absolute;width:220px;height:220px;border-radius:999px;filter:blur(40px);opacity:.22;pointer-events:none}
+    .blob.pink{background:#f472b6;top:-80px;right:-60px}.blob.blue{background:#38bdf8;bottom:-120px;left:-40px}
+    .app-inner{position:relative;z-index:1}
+
+    header{display:flex;flex-direction:column;gap:12px;margin-bottom:10px}
+    .title{font-size:1.5rem;font-weight:800}
+    .subtitle{color:var(--muted)}
+    .name-form{display:flex;gap:8px;align-items:center;border:1px solid rgba(148,163,184,.5);padding:8px 10px;border-radius:14px;background:rgba(15,23,42,.85)}
+    .name-form label{color:var(--muted)}
+    .name-form input{flex:1;background:transparent;border:none;outline:none;color:var(--text);padding:10px 8px;font-size:1rem}
+    .btn{border:none;border-radius:999px;padding:10px 14px;cursor:pointer;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0b1120}
+
+    /* Thumbnail row */
+    .thumbs{display:flex;justify-content:center;gap:16px;margin-top:8px}
+    .thumb{width:110px;height:110px;border-radius:999px;position:relative;flex:0 0 auto;
+      border:3px solid rgba(244,114,182,.45);box-shadow:0 10px 24px rgba(0,0,0,.45);overflow:hidden;background:#000}
+    .thumb video{width:100%;height:100%;object-fit:cover;display:block}
+    .thumb .label{position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);background:rgba(2,6,23,.8);
+      padding:3px 8px;border-radius:999px;font-size:.8rem;border:1px solid rgba(148,163,184,.4)}
+    .thumb.selected{outline:3px solid var(--ok);box-shadow:0 0 0 6px rgba(110,231,183,.15)}
+
+    /* Sticky submit bar */
+    .submit-bar{position:sticky;bottom:0;left:0;right:0;margin-top:16px}
+    .submit-inner{display:flex;align-items:center;justify-content:space-between;gap:10px;background:linear-gradient(180deg,rgba(2,6,23,0) 0%,rgba(2,6,23,.6) 15%,rgba(2,6,23,.9) 100%);
+      padding:12px 10px 14px;border-top:1px dashed rgba(148,163,184,.4);backdrop-filter:blur(6px);border-bottom-left-radius:20px;border-bottom-right-radius:20px}
+    .status{min-height:1.2em}.status.error{color:var(--err)}.status.ok{color:var(--ok)}
+    .submit-btn{border:none;border-radius:999px;padding:12px 18px;font-weight:900;font-size:1rem;cursor:pointer;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0b1120;box-shadow:0 10px 24px rgba(0,0,0,.5)}
+    .submit-btn:disabled{opacity:.55;cursor:not-allowed}
+
+    /* Fullscreen modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;
+      background:rgba(2,6,23,.75);backdrop-filter:blur(6px);z-index:50}
+    .modal.open{display:flex}
+    .viewer{position:relative;width:min(92vw,480px);aspect-ratio:9/16;border-radius:16px;overflow:hidden;border:1px solid rgba(148,163,184,.35);box-shadow:0 18px 45px rgba(0,0,0,.6);background:#000}
+    .viewer video{width:100%;height:100%;object-fit:cover;display:block}
+    .close{position:absolute;top:8px;right:8px;border:none;border-radius:999px;padding:8px 10px;font-weight:900;cursor:pointer;background:rgba(2,6,23,.85);color:var(--text);border:1px solid rgba(148,163,184,.5)}
+    .select-btn{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);border:none;border-radius:999px;padding:10px 16px;font-weight:900;cursor:pointer;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0b1120;box-shadow:0 10px 24px rgba(0,0,0,.5)}
+
+    @media (min-width:420px){ .thumb{width:128px;height:128px} }
   </style>
 </head>
 <body>
@@ -90,158 +63,168 @@
     <div class="blob pink"></div><div class="blob blue"></div>
     <div class="app-inner">
       <header>
-        <div class="title">Dance Video Voting 💃💃</div>
-        <p class="subtitle">Watch each vertical clip, type your name, and vote for your <b>top two</b> performances!</p>
+        <div class="title">Dance Video Voting — tap a circle to preview</div>
+        <p class="subtitle">Type your name, preview each clip fullscreen, and pick your <b>top two</b>.</p>
         <form id="name-form" class="name-form" onsubmit="return false;">
-          <label for="name-input" style="color:var(--muted); font-size:.9rem;">Your name</label>
+          <label for="name-input">Name</label>
           <input id="name-input" type="text" placeholder="e.g. Zhen..." autocomplete="off" />
-          <button id="start-voting-btn" type="button">Start voting 💫</button>
+          <button id="start-btn" class="btn" type="button">Start 💫</button>
         </form>
       </header>
 
-      <main>
-        <form id="vote-form">
-          <div class="videos-grid">
-            <!-- SPAGHETTI -->
-            <div class="video-card">
-              <div class="song">Spaghetti</div>
-              <div class="video-wrapper">
-                <video controls preload="metadata">
-                  <source src="video/spaghetti.mp4" type="video/mp4" />
-                </video>
-              </div>
-              <div class="vote-row">
-                <label class="cute-check">
-                  <input type="checkbox" name="vote" value="Spaghetti" />
-                  <span>✓</span>
-                </label>
-                <span class="vote-caption">Kpop</span>
-              </div>
-            </div>
+      <!-- Circular thumbnails row -->
+      <section class="thumbs">
+        <button class="thumb" data-name="Spaghetti" data-src="video/spaghetti.mp4" aria-label="Open Spaghetti">
+          <video muted playsinline loop preload="metadata"><source src="video/spaghetti.mp4" type="video/mp4"></video>
+          <span class="label">Spaghetti</span>
+        </button>
+        <button class="thumb" data-name="Strategy" data-src="video/strategy.mp4" aria-label="Open Strategy">
+          <video muted playsinline loop preload="metadata"><source src="video/strategy.mp4" type="video/mp4"></video>
+          <span class="label">Strategy</span>
+        </button>
+        <button class="thumb" data-name="Sports Car" data-src="video/sports_car.mp4" aria-label="Open Sports Car">
+          <video muted playsinline loop preload="metadata"><source src="video/sports_car.mp4" type="video/mp4"></video>
+          <span class="label">Sports Car</span>
+        </button>
+      </section>
 
-            <!-- STRATEGY -->
-            <div class="video-card">
-              <div class="song">Strategy</div>
-              <div class="video-wrapper">
-                <video controls preload="metadata">
-                  <source src="video/strategy.mp4" type="video/mp4" />
-                </video>
-              </div>
-              <div class="vote-row">
-                <label class="cute-check">
-                  <input type="checkbox" name="vote" value="Strategy" />
-                  <span>✓</span>
-                </label>
-                <span class="vote-caption">Jazz</span>
-              </div>
-            </div>
-
-            <!-- SPORTS CAR -->
-            <div class="video-card">
-              <div class="song">Sports Car</div>
-              <div class="video-wrapper">
-                <video controls preload="metadata">
-                  <source src="video/sports_car.mp4" type="video/mp4" />
-                </video>
-              </div>
-              <div class="vote-row">
-                <label class="cute-check">
-                  <input type="checkbox" name="vote" value="Sports Car" />
-                  <span>✓</span>
-                </label>
-                <span class="vote-caption">Jazz</span>
-              </div>
-            </div>
+      <!-- Sticky submit -->
+      <div class="submit-bar">
+        <div class="submit-inner">
+          <div>
+            <div id="status" class="status"></div>
+            <div class="subtitle">Selected: <span id="count">0/2</span></div>
           </div>
+          <button id="submit-btn" class="submit-btn" disabled>Submit votes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-          <div class="footer">
-            <span>Tip: vote for <b>exactly two</b> videos ✨</span>
-            <div style="display:flex; align-items:center; gap:10px;">
-              <span id="status" class="status-message"></span>
-              <button id="submit-btn" type="submit" class="name-form button" style="padding:8px 16px;">Submit votes</button>
-            </div>
-          </div>
-        </form>
-      </main>
+  <!-- Fullscreen modal viewer -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="viewer">
+      <button class="close" id="close">✕</button>
+      <video id="player" controls playsinline preload="metadata"></video>
+      <button id="pick" class="select-btn">Select this</button>
     </div>
   </div>
 
   <script>
-    const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbySrA8feUCAfmKFDet3RRsHiY28f4dzgIh1puQgVwNdBEvV9vGNe2ESIQC1GxHma02M/exec"; 
-    const nameInput = document.getElementById("name-input");
-    const startBtn = document.getElementById("start-voting-btn");
-    const form = document.getElementById("vote-form");
-    const checks = Array.from(document.querySelectorAll('input[name="vote"]'));
-    const statusEl = document.getElementById("status");
-    let voter = "";
+    // ===== CONFIG =====
+    const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbySrA8feUCAfmKFDet3RRsHiY28f4dzgIh1puQgVwNdBEvV9vGNe2ESIQC1GxHma02M/exec"; // e.g. https://script.google.com/macros/s/.../exec
 
-    const setStatus = (msg, type)=>{
+    // ===== ELEMENTS =====
+    const nameInput = document.getElementById('name-input');
+    const startBtn  = document.getElementById('start-btn');
+    const statusEl  = document.getElementById('status');
+    const countEl   = document.getElementById('count');
+    const submitBtn = document.getElementById('submit-btn');
+    const thumbs    = Array.from(document.querySelectorAll('.thumb'));
+
+    const modal  = document.getElementById('modal');
+    const player = document.getElementById('player');
+    const pickBtn= document.getElementById('pick');
+    const closeBtn= document.getElementById('close');
+
+    // ===== STATE =====
+    let voter = "";
+    const chosen = new Set(); // names of selected videos
+    const submittedNames = new Set();
+    let currentVideo = { name: "", src: "" };
+
+    // ===== HELPERS =====
+    const setStatus = (msg, ok=false) => {
       statusEl.textContent = msg || "";
-      statusEl.classList.remove("error","success");
-      if(type) statusEl.classList.add(type);
+      statusEl.classList.toggle('ok', ok);
+      statusEl.classList.toggle('error', !ok && !!msg);
+    };
+    const syncSubmit = () => {
+      const ready = !!(voter || nameInput.value.trim()) && chosen.size === 2;
+      countEl.textContent = `${chosen.size}/2`;
+      submitBtn.disabled = !ready;
+      if (!ready) {
+        if (!(voter || nameInput.value.trim())) setStatus("Enter your name to start 📝");
+        else if (chosen.size < 2) setStatus("Pick exactly two videos ✌️");
+      } else setStatus(`Ready to submit, ${voter || nameInput.value.trim()}!`, true);
+    };
+    const openModal = (name, src) => {
+      currentVideo = { name, src };
+      player.src = src;
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      player.play().catch(()=>{});
+      // Update pick button label to reflect toggle state
+      pickBtn.textContent = chosen.has(name) ? "Unselect" : "Select this";
+    };
+    const closeModal = () => {
+      player.pause();
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
     };
 
-    checks.forEach(cb=>{
-      const box = cb.closest(".cute-check");
-      cb.addEventListener("change", ()=>{
-        const selected = checks.filter(c=>c.checked);
-        if(selected.length > 2){
-          cb.checked=false;
-          setStatus("You can only pick 2 videos 💡","error");
-        }else setStatus("");
-        box.classList.toggle("checked", cb.checked);
+    // ===== UI EVENTS =====
+    startBtn.addEventListener('click', ()=>{
+      const n = nameInput.value.trim();
+      if(!n){ setStatus("Please enter your name 🐾"); return; }
+      voter = n;
+      setStatus(`Hi ${n}! Tap a circle to preview, then select two 💕`, true);
+      syncSubmit();
+    });
+
+    // Thumbnail click → open fullscreen modal
+    thumbs.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        openModal(btn.dataset.name, btn.dataset.src);
       });
     });
 
-    startBtn.addEventListener("click", ()=>{
-      const n = nameInput.value.trim();
-      if(!n){ setStatus("Please enter your name to start voting 📝","error"); return; }
-      voter = n;
-      setStatus(`Hi ${n}! Pick your top two favorites 💕`,"success");
+    // In-modal toggle select
+    pickBtn.addEventListener('click', ()=>{
+      const name = currentVideo.name;
+      if (chosen.has(name)) {
+        chosen.delete(name);
+        document.querySelector(`.thumb[data-name="${name}"]`)?.classList.remove('selected');
+        pickBtn.textContent = "Select this";
+      } else {
+        if (chosen.size >= 2) { setStatus("You can only pick 2 videos 💡"); return; }
+        chosen.add(name);
+        document.querySelector(`.thumb[data-name="${name}"]`)?.classList.add('selected');
+        pickBtn.textContent = "Unselect";
+      }
+      syncSubmit();
     });
 
-    const submitted = new Set();
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
 
-    form.addEventListener("submit", e=>{
-      e.preventDefault();
-      const n = voter || nameInput.value.trim();
-      if(!n){ setStatus("Please enter your name first 🐾","error"); return; }
-      const selected = checks.filter(c=>c.checked).map(c=>c.value);
-      if(selected.length!==2){ setStatus("Select exactly two videos ✌️","error"); return; }
-      if(submitted.has(n.toLowerCase())){ setStatus("You've already voted 💕","error"); return; }
+    // Submit votes
+    submitBtn.addEventListener('click', async ()=>{
+      const name = voter || nameInput.value.trim();
+      if(!name){ setStatus("Please enter your name first 🐾"); return; }
+      if(chosen.size !== 2){ setStatus("Select exactly two videos ✌️"); return; }
+      if(submittedNames.has(name.toLowerCase())){ setStatus("Looks like you've already voted. Thank you! 🫶"); return; }
 
-      console.log("Vote:", { name:n, votes:selected, time:new Date().toISOString() });
-      setStatus(`Thanks ${n}! You voted for ${selected.join(" + ")} 💃`,"success");
-      submitted.add(n.toLowerCase());
-      checks.forEach(c=>{c.checked=false;c.closest(".cute-check").classList.remove("checked");});
-    });
-
-    form.addEventListener("submit", async (e)=>{
-        e.preventDefault();
-        const n = voter || nameInput.value.trim();
-        if(!n){ setStatus("Please enter your name first 🐾","error"); return; }
-        const chosen = checks.filter(c=>c.checked).map(c=>c.value);
-        if(chosen.length !== 2){ setStatus("Select exactly two videos ✌️","error"); return; }
-
-        try {
-        const res = await fetch(APP_SCRIPT_URL, {
-            method: "POST",
-            mode: "no-cors", // Apps Script JSON often works with no-cors publicly
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name: n, votes: chosen, userAgent: navigator.userAgent })
+      const votes = Array.from(chosen);
+      try {
+        await fetch(APP_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, votes, userAgent: navigator.userAgent })
         });
-
-        // With no-cors, we can’t read the response reliably; optimistically thank the user:
-        setStatus(`Thanks ${n}! Your vote for ${chosen.join(" + ")} is recorded ✨`, "success");
-
-        // Optional local guard to reduce duplicates in-session
-        submitted.add(n.toLowerCase());
-        checks.forEach(c=>{ c.checked=false; c.closest(".cute-check").classList.remove("checked"); });
-
-        } catch (err) {
-        setStatus("Sorry, there was a problem saving your vote. Try again.", "error");
-        }
+        submittedNames.add(name.toLowerCase());
+        setStatus(`Thanks, ${name}! You voted for ${votes.join(" + ")} ✨`, true);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } catch {
+        setStatus("Sorry, there was a problem saving your vote. Try again.");
+      }
     });
+
+    // Initial
+    syncSubmit();
   </script>
 </body>
 </html>
