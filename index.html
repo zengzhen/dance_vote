@@ -156,6 +156,19 @@
     .confetti-canvas{
       position:fixed;inset:0;pointer-events:none;z-index:60;
     }
+    .results-btn{
+      display:none;
+      border:1px solid rgba(148,163,184,.5);
+      border-radius:999px;
+      padding:10px 14px;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:800;
+      background:rgba(15,23,42,.7);
+      transition:transform .12s ease,border-color .12s ease;
+      white-space:nowrap;
+    }
+    .results-btn:hover{transform:translateY(-1px);border-color:rgba(244,114,182,.7)}
 
     /* Fullscreen modal */
     .modal{
@@ -280,13 +293,16 @@
       <!-- Sticky submit -->
       <div class="submit-bar">
         <div class="submit-inner">
-          <div>
-            <div id="status" class="status"></div>
-            <div class="subtitle">Selected: <span id="count">0/2</span></div>
-          </div>
-          <button id="submit-btn" class="submit-btn" disabled>Submit votes</button>
-        </div>
+      <div>
+        <div id="status" class="status"></div>
+        <div class="subtitle">Selected: <span id="count">0/2</span></div>
       </div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <a id="results-link" class="results-btn" href="results.html" target="_blank" rel="noopener">See live results</a>
+        <button id="submit-btn" class="submit-btn" disabled>Submit votes</button>
+      </div>
+    </div>
+  </div>
     </div>
   </div>
 
@@ -309,6 +325,7 @@
     const statusEl  = document.getElementById('status');
     const countEl   = document.getElementById('count');
     const submitBtn = document.getElementById('submit-btn');
+    const resultsLink = document.getElementById('results-link');
     const thumbs    = Array.from(document.querySelectorAll('.thumb'));
     const inlineSelects = Array.from(document.querySelectorAll('.select-inline'));
 
@@ -393,8 +410,13 @@
         submitBtn.disabled = true;
         submitBtn.textContent = "Submitted ✨";
         setStatus("Vote submitted. Refresh to vote again.", true);
+        if (resultsLink) {
+          resultsLink.style.display = 'inline-flex';
+          resultsLink.href = `results.html?ts=${Date.now()}`;
+        }
         return;
       }
+      if (resultsLink) resultsLink.style.display = 'none';
       const n = nameInput.value.trim();
       const ready = !!n && chosen.size === 2;
       countEl.textContent = `${chosen.size}/2`;
@@ -515,6 +537,10 @@
         submitBtn.disabled = true;
         setTimeout(()=>submitBtn.classList.remove('celebrating'), 1000);
         fireConfetti();
+        if (resultsLink) {
+          resultsLink.style.display = 'inline-flex';
+          resultsLink.href = `results.html?ts=${Date.now()}`;
+        }
         window.scrollTo({ top: 0, behavior: "smooth" });
       } catch {
         setStatus("Sorry, there was a problem saving your vote. Try again.");

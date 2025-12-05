@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dance Voting Results 💜</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#020617;--card:#020617;--accent:#f472b6;--accent-2:#38bdf8;--text:#e5e7eb;--muted:#9ca3af;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:"Nunito",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:radial-gradient(circle at top,#1f2937 0,#020617 55%);
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+    .shell{
+      width:100%;
+      max-width:900px;
+      background:rgba(15,23,42,.96);
+      border-radius:22px;
+      border:1px solid rgba(148,163,184,.35);
+      box-shadow:0 20px 50px rgba(0,0,0,.7);
+      padding:18px 16px 20px;
+      position:relative;
+      overflow:hidden;
+    }
+    .blob{
+      position:absolute;width:260px;height:260px;border-radius:999px;
+      filter:blur(40px);opacity:.23;pointer-events:none;
+    }
+    .blob.pink{background:#f472b6;top:-80px;right:-60px}
+    .blob.blue{background:#38bdf8;bottom:-120px;left:-40px}
+    .inner{position:relative;z-index:1}
+    header{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+    .title{font-size:1.6rem;font-weight:800}
+    .subtitle{font-size:.95rem;color:var(--muted)}
+    .back-link{
+      font-size:.9rem;
+      text-decoration:none;
+      color:var(--accent-2);
+      margin-top:4px;
+    }
+    .frame-wrap{
+      margin-top:10px;
+      background:radial-gradient(circle at 15% 15%,rgba(56,189,248,.08),rgba(15,23,42,.96));
+      border-radius:18px;
+      padding:10px;
+      border:1px solid rgba(148,163,184,.4);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.02);
+    }
+    .chart-frame{
+      width:100%;
+      min-height:420px;
+      border:0;
+      border-radius:12px;
+      background:#020617;
+      transform:scale(1.05);
+      transform-origin:top left;
+    }
+    @media (min-width:768px){
+      .shell{padding:22px 22px 24px}
+      .chart-frame{min-height:520px;transform:scale(1.1);}
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="blob pink"></div><div class="blob blue"></div>
+    <div class="inner">
+      <header>
+        <div class="title">Live Voting Results</div>
+        <p class="subtitle">This chart updates automatically as people vote. Refresh if you just submitted.</p>
+        <a class="back-link" href="index.html">← Back to voting</a>
+      </header>
+
+      <div class="frame-wrap">
+        <!-- Replace IFRAME_SRC_HERE with the published chart iframe src from Google Sheets -->
+        <iframe
+          class="chart-frame"
+          data-src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTpip0RlAvJSJAfnuLBGZHBWbCmgrRVYC3djHtWYWhd1T89C-MA0NJmeRFZ7Dh5ukroUsio0MxoAFy2/pubchart?oid=268384705&format=interactive"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Bust cache so we always pull the freshest published chart
+    const frame = document.querySelector('.chart-frame');
+    if (frame && frame.dataset.src) {
+      const ts = Date.now();
+      const glue = frame.dataset.src.includes('?') ? '&' : '?';
+      frame.src = `${frame.dataset.src}${glue}cacheBust=${ts}`;
+    }
+  </script>
+</body>
+</html>
