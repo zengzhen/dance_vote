@@ -156,17 +156,25 @@
     .confetti-canvas{
       position:fixed;inset:0;pointer-events:none;z-index:60;
     }
-    .results-btn{
+    .results-footer{
       display:none;
+      margin:14px auto 0;
+      text-align:center;
+    }
+    .results-btn{
       border:1px solid rgba(148,163,184,.5);
       border-radius:999px;
-      padding:10px 14px;
+      padding:12px 16px;
       color:var(--text);
       text-decoration:none;
       font-weight:800;
-      background:rgba(15,23,42,.7);
+      background:rgba(15,23,42,.85);
       transition:transform .12s ease,border-color .12s ease;
       white-space:nowrap;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      box-shadow:0 8px 20px rgba(0,0,0,.35);
     }
     .results-btn:hover{transform:translateY(-1px);border-color:rgba(244,114,182,.7)}
 
@@ -297,11 +305,11 @@
         <div id="status" class="status"></div>
         <div class="subtitle">Selected: <span id="count">0/2</span></div>
       </div>
-      <div style="display:flex;gap:8px;align-items:center;">
-        <a id="results-link" class="results-btn" href="results.html" target="_blank" rel="noopener">See live results</a>
-        <button id="submit-btn" class="submit-btn" disabled>Submit votes</button>
-      </div>
+      <button id="submit-btn" class="submit-btn" disabled>Submit votes</button>
     </div>
+  </div>
+  <div id="results-footer" class="results-footer">
+    <a id="results-link" class="results-btn" href="results.html" target="_blank" rel="noopener">📊 See live results</a>
   </div>
     </div>
   </div>
@@ -326,6 +334,7 @@
     const countEl   = document.getElementById('count');
     const submitBtn = document.getElementById('submit-btn');
     const resultsLink = document.getElementById('results-link');
+    const resultsFooter = document.getElementById('results-footer');
     const thumbs    = Array.from(document.querySelectorAll('.thumb'));
     const inlineSelects = Array.from(document.querySelectorAll('.select-inline'));
 
@@ -410,13 +419,13 @@
         submitBtn.disabled = true;
         submitBtn.textContent = "Submitted ✨";
         setStatus("Vote submitted. Refresh to vote again.", true);
-        if (resultsLink) {
-          resultsLink.style.display = 'inline-flex';
+        if (resultsFooter && resultsLink) {
+          resultsFooter.style.display = 'block';
           resultsLink.href = `results.html?ts=${Date.now()}`;
         }
         return;
       }
-      if (resultsLink) resultsLink.style.display = 'none';
+      if (resultsFooter) resultsFooter.style.display = 'none';
       const n = nameInput.value.trim();
       const ready = !!n && chosen.size === 2;
       countEl.textContent = `${chosen.size}/2`;
@@ -537,8 +546,8 @@
         submitBtn.disabled = true;
         setTimeout(()=>submitBtn.classList.remove('celebrating'), 1000);
         fireConfetti();
-        if (resultsLink) {
-          resultsLink.style.display = 'inline-flex';
+        if (resultsFooter && resultsLink) {
+          resultsFooter.style.display = 'block';
           resultsLink.href = `results.html?ts=${Date.now()}`;
         }
         window.scrollTo({ top: 0, behavior: "smooth" });
