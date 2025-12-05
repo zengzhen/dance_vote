@@ -70,13 +70,15 @@
       padding:10px;
       border:1px solid rgba(148,163,184,.4);
       box-shadow:inset 0 0 0 1px rgba(255,255,255,.02);
-      min-height:55vh;
+      min-height:0;
       overflow:hidden;
     }
     .chart-frame{
       width:100%;
-      height:min(62vh, 90vw);
-      min-height:320px;
+      aspect-ratio:16/9;
+      height:auto;
+      min-height:260px;
+      max-height:70vh;
       border:0;
       border-radius:12px;
       background:#020617;
@@ -84,8 +86,8 @@
     }
     @media (min-width:768px){
       .shell{padding:22px 22px 24px}
-      .frame-wrap{min-height:70vh;}
-      .chart-frame{height:68vh;min-height:520px;}
+      .frame-wrap{min-height:60vh;}
+      .chart-frame{max-height:70vh;}
     }
   </style>
 </head>
