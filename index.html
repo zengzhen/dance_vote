@@ -237,7 +237,7 @@
     <div class="app-inner">
       <header>
         <div class="title">Dance Video Voting — tap a circle to preview</div>
-        <p class="subtitle">Type your name, preview each clip fullscreen, and pick your <b>top two</b>.</p>
+        <p class="subtitle">Type your name, preview each clip fullscreen, and pick your <b>top one or two</b>.</p>
         <form id="name-form" class="name-form" onsubmit="return false;">
           <label for="name-input">Name</label>
           <input id="name-input" type="text" placeholder="e.g. Kiki..." autocomplete="off" />
@@ -427,14 +427,16 @@
       }
       if (resultsFooter) resultsFooter.style.display = 'none';
       const n = nameInput.value.trim();
-      const ready = !!n && chosen.size === 2;
+      const ready = !!n && chosen.size >= 1 && chosen.size <= 2;
       countEl.textContent = `${chosen.size}/2`;
       submitBtn.disabled = !ready;
 
       if (!n) {
         setStatus("Type your name so we can count your vote 📝");
+      } else if (chosen.size < 1) {
+        setStatus(`Hi ${n}! Pick at least one video ✌️`);
       } else if (chosen.size < 2) {
-        setStatus(`Hi ${n}! Pick exactly two videos ✌️`);
+        setStatus(`Hi ${n}! You can pick up to two videos ✌️`);
       } else {
         setStatus(`Ready to submit, ${n}!`, true);
       }
@@ -459,7 +461,7 @@
         chosen.delete(name);
       } else {
         if (chosen.size >= 2) {
-          setStatus("You can only pick 2 videos 💡");
+          setStatus("You can only pick up to 2 videos 💡");
           return;
         }
         chosen.add(name);
@@ -516,7 +518,7 @@
       if (submitting) return;
       const name = nameInput.value.trim();
       if(!name){ setStatus("Please enter your name first 🐾"); return; }
-      if(chosen.size !== 2){ setStatus("Select exactly two videos ✌️"); return; }
+      if(chosen.size < 1){ setStatus("Select at least one video ✌️"); return; }
       if(submittedNames.has(name.toLowerCase())){
         setStatus("Looks like you've already voted. Thank you! 🫶");
         return;
