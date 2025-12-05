@@ -75,14 +75,13 @@
     }
     .chart-frame{
       width:100%;
-      aspect-ratio:16/9;
       height:auto;
-      min-height:260px;
-      max-height:70vh;
+      max-width:100%;
       border:0;
       border-radius:12px;
       background:#020617;
       display:block;
+      object-fit:contain;
     }
     @media (min-width:768px){
       .shell{padding:22px 22px 24px}
@@ -106,10 +105,11 @@
 
       <div class="frame-wrap">
         <!-- Replace IFRAME_SRC_HERE with the published chart iframe src from Google Sheets -->
-        <iframe
+        <img
           class="chart-frame"
-          data-src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTpip0RlAvJSJAfnuLBGZHBWbCmgrRVYC3djHtWYWhd1T89C-MA0NJmeRFZ7Dh5ukroUsio0MxoAFy2/pubchart?oid=268384705&format=interactive"
-        ></iframe>
+          alt="Live voting chart"
+          data-src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTpip0RlAvJSJAfnuLBGZHBWbCmgrRVYC3djHtWYWhd1T89C-MA0NJmeRFZ7Dh5ukroUsio0MxoAFy2/pubchart?oid=268384705&format=image"
+        />
       </div>
     </div>
   </div>
